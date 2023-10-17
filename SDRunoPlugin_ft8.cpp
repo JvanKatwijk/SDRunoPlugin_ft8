@@ -168,7 +168,7 @@ std::string version = "V2.3";
 }
 
 static inline
-std::complex<float> cmul(std::complex<float> x, float y) {
+std::complex<float> cmul (std::complex<float> x, float y) {
 	return std::complex<float>(real(x) * y, imag(x) * y);
 }
 
@@ -290,6 +290,7 @@ int	Width	= spectrumWidth. load ();
 	      maxIndex = i;
 	   }
 	}
+
 	costasValue it = cache. at (maxIndex);
 	float message [174];
 //	for (auto it: cache) {
@@ -494,7 +495,7 @@ void	SDRunoPlugin_ft8::handle_pskReporterButton() {
 	   std::string n = callsign. value ();		//nana::string
 	   std::string a = antenna. value ();		//nana::string
 	   std::string g = grid. value ();		//nana::string
-	   m_form. ft8_textBlock(n + "  " + g + " " + a);;
+	   m_form. ft8_textBlock (n + "  " + g + " " + a);;
 	   m_form. Store_callsign (n);
 	   m_form. Store_grid     (g);
 	   m_form. Store_antenna	(a);
@@ -506,7 +507,7 @@ void	SDRunoPlugin_ft8::handle_showMessageButton	() {
 	showMessage = !showMessage;
 }
 
-void	SDRunoPlugin_ft8::handle_startstopButton() {
+void	SDRunoPlugin_ft8::handle_startstopButton () {
 	locker.lock();
 	if (theWriter != nullptr) {
 	   delete theWriter;

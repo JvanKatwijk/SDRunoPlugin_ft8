@@ -24,11 +24,11 @@
 #ifndef	__REPORTER_WRITER_H
 #define	__REPORTER_WRITER_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <string.h>
-#include <time.h>
+#include	<stdio.h>
+#include	<stdlib.h>
+#include	<stdint.h>
+#include	<string.h>
+#include	<time.h>
 #include	<string>
 #include	<vector>
 #include	<mutex>

@@ -28,7 +28,7 @@
 #include <string.h>
 #include <time.h>
 
-#pragma  comment(lib,"ws2_32.lib")
+#pragma  comment (lib,"ws2_32.lib")
 
 const char name [] = "report.pskreporter.info";
 const char soft [] = "SDRunoPlugin_ft8";

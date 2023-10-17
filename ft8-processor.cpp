@@ -140,7 +140,7 @@ packHandler unPacker;
 	               int freq = theBuffer [blockToRead]. frequency +
 	                                            theDecoder -> getVFO ();
 	               theDecoder -> addMessage (callIdent, locator,
-	                                  freq, snr);
+	                                                   freq, snr);
 	            }
 	         }
 	      }

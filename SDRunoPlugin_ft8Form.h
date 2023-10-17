@@ -123,5 +123,6 @@ private:
 	nana::combox	readPresets
 	                  {*this, nana::rectangle (410, 70, 80, 20)};
 	std::list<std::string> displayList;
-	nana::textbox	textBlock {*this, nana::rectangle (30, 100, 480, 480) };	 
+//	nana::textbox	textBlock {*this, nana::rectangle (30, 100, 480, 480) };	 
+	nana::label	textBlock {*this, nana::rectangle (30, 100, 480, 480) };	 
 };

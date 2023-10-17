@@ -345,6 +345,9 @@ void	SDRunoPlugin_ft8Form::Setup() {
 	dumpMode. bgcolor (nana::colors::green);
 	ft8Dump. tooltip ("The window will show the last 30 messages recognized, touch this button to save all output in a (text) file");
 
+	textBlock. transparent (true);
+	textBlock. fgcolor (nana::colors::white);
+
 	copyRightLabel. transparent (true);
 	copyRightLabel. fgcolor (nana::colors::white);
 	copyRightLabel. caption ("\xa9 2022");
