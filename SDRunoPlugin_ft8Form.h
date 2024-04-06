@@ -47,7 +47,8 @@ public:
 	int	ft8_getSearchWidth	();
 	void	set_ft8Dump		();
 	void	show_pskStatus		(bool);
-	void	show_version	(const std::string &);
+	void	set_cqSelector		(const std::string &);
+	void	show_version		(const std::string &);
 	void	handle_showMessageButton	();
 	void	hide_showMessageButton	(bool);
 	void	handle_pskReporterButton	();
@@ -94,19 +95,21 @@ private:
 	// TODO: Now add your UI controls here
 	std::mutex locker;
 	nana::spinbox	ldpcDepth
-	                  {*this, nana::rectangle (30, 30,  80, 20) };
+	                  {*this, nana::rectangle ( 30, 30, 60, 30) };
 	nana::spinbox	searchWidth
-	                  {*this, nana::rectangle (120, 30, 80, 20)};
+	                  {*this, nana::rectangle (100, 30, 60, 30)};
 	nana::button	ft8Dump
-	                  {*this, nana::rectangle (210, 30, 50, 20)};
+	                  {*this, nana::rectangle (170, 30, 50, 30)};
 	nana::label	dumpMode
-	                  {*this, nana::rectangle (270, 30, 50, 20)};
-	nana::label	version
-	                  {*this, nana::rectangle (330, 30, 50, 20)};
+	                  {*this, nana::rectangle (230, 30, 50, 30)};
 	nana::button	presetButton
-	                  {*this, nana::rectangle (390, 30, 50, 20)};
-	nana::label	copyRightLabel
-	                  {*this, nana::rectangle (450, 30, 50, 30)};
+	                  {*this, nana::rectangle (290, 30, 50, 30)};
+	nana::combox	cqSelector
+	                  {*this, nana::rectangle (350, 30, 70, 30)};
+	nana::label	version
+	                  {*this, nana::rectangle (430, 30, 40, 30)};
+		nana::label	copyRightLabel
+	                  {*this, nana::rectangle (480, 30, 40, 30)};
 //	line 2
 	nana::button	pskstartstopButton
 	                  {*this, nana::rectangle (30, 70, 50, 20)};

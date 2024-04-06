@@ -35,13 +35,14 @@ public:
 		packHandler	();
 		~packHandler	();
 
-	std::string	unpackMessage	(const uint8_t* m_in);
+	std::string	unpackMessage	(const uint8_t* m_in, bool &);
 	std::vector<std::string>	extractCall (const uint8_t *m_in);
 private:
 	hashHandler	the_hashHandler;
 	bool		pskReporterReady;
 	std::string	handle_type0	(const uint8_t *m_in, int n3);
-	std::string	handle_type1	(const uint8_t *m_in, uint8_t i3);
+	std::string	handle_type1	(const uint8_t *m_in,
+	                                         uint8_t i3, bool &);
 	std::string	handle_type3	(const uint8_t *m_in);
 	std::string	handle_type4	(const uint8_t* m_in);
 	std::string	handle_type5	(const uint8_t* m_in);

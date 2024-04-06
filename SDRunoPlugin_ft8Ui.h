@@ -36,8 +36,9 @@ public:
 	void	Store_grid	(const std::string &);
 	void	Store_antenna	(const std::string &);
 
-	void	ft8_ldpcDepth	(int);
-	void	ft8_searchWidth	(int);
+	void	set_cqSelector		(bool);
+	void	ft8_ldpcDepth		(int);
+	void	ft8_searchWidth		(int);
 
 	int	ft8_getIterations	();
 	int	ft8_getSearchWidth	();	

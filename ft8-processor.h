@@ -51,6 +51,7 @@ public:
 	void	PassOn			(int, float, int, float *);
 	void	set_maxIterations	(int);
 	bool	set_ft8Dump		();
+	void	set_cqSelector		(bool b);
 private:
 	dlCache		theCache;
 	void	run		();
@@ -72,7 +73,7 @@ private:
 	Semaphore	freeSlots;
 	Semaphore	usedSlots;
 	std::atomic<bool> running;
-
+	std::atomic<bool> cqSelector;
 	FILE		*filePointer;
 	SDRunoPlugin_ft8	*theDecoder;
 	std::atomic<int>	maxIterations;

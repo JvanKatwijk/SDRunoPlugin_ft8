@@ -348,10 +348,16 @@ void	SDRunoPlugin_ft8Form::Setup() {
 	textBlock. transparent (true);
 	textBlock. fgcolor (nana::colors::white);
 
+	cqSelector. push_back ("All");
+        cqSelector. push_back ("CQ only");
+        cqSelector. option (0);
+        cqSelector. events(). selected ([&](const nana::arg_combox &ar_cbx){
+                        set_cqSelector (ar_cbx. widget. caption ());});
+		cqSelector.tooltip("select between seeing all messages or only CQ's");
 	copyRightLabel. transparent (true);
 	copyRightLabel. fgcolor (nana::colors::white);
 	copyRightLabel. caption ("\xa9 2022");
-	copyRightLabel. tooltip ("This plugin is created by Jan van Katwijk\n\
+	copyRightLabel. tooltip ("Copyright Jan van Katwijk\n\
 Lazy Chair Computing\n\
 all rights reserved\n\
 the ldpc decoder is taken from work of Garlis Goba, his righte are acknowledged\n\
@@ -377,6 +383,10 @@ the values are maintained between invocations of the plugin");
         freqSetter. push_back ("7075");
         freqSetter. push_back ("10136");
         freqSetter. push_back ("14075");
+		freqSetter. push_back ("18100");
+		freqSetter. push_back ("21074");
+		freqSetter. push_back ("24915");
+
 	std::string presetList = m_parent. load_presets ();
 	std::istringstream f (presetList);
 	
@@ -504,5 +514,9 @@ bool	SDRunoPlugin_ft8Form::add_presetFrequency (const std::string freq) {
 	      return false;
 	freqSetter. push_back (freq);
 	return true;
+}
+
+void	SDRunoPlugin_ft8Form::set_cqSelector	(const std::string &s) {
+	m_parent. set_cqSelector (s == "CQ only");
 }
 

@@ -162,7 +162,7 @@ int index	= 0;
 	}
 }
 
-std::string	packHandler::unpackMessage (const uint8_t* m_in) {
+std::string	packHandler::unpackMessage (const uint8_t* m_in, bool &is_CQ) {
 std::string	result;
 
 	uint8_t i3 = getBits (m_in, 74, 3);
@@ -171,8 +171,12 @@ std::string	result;
 	      return handle_type0 (m_in, getBits (m_in, 71, 3));
 
 	   case 1:	// c28 r1 c28 r1 R1 g15
+	      result = handle_type1 (m_in, i3, is_CQ);
+              return result;
+
 	   case 2:	// c28 p1 c28 p1 R1 g15
-	      return handle_type1 (m_in, i3);
+	      result = handle_type1 (m_in, i3, is_CQ);
+              return result;
 
 	   case 3:	// t1 c28 c28 R1 r3 s13
 	      return handle_type3 (m_in);
@@ -219,7 +223,8 @@ std::string	packHandler::handle_type0 (const uint8_t *m_in, int n3) {
 //	handle type 1, i.e. "standard" messages
 //	handles both type1 and type2 messages
 //	c28 r1 c28 r1 R1 g15:	K1ABC/R PA0JAN/R EN35
-std::string	packHandler::handle_type1 (const uint8_t *m_in, uint8_t i3) {
+std::string	packHandler::handle_type1 (const uint8_t *m_in,
+	                                    uint8_t i3, bool &is_CQ) {
 uint32_t c28a, c28b;
 uint16_t g15;
 uint8_t R1;
@@ -237,6 +242,9 @@ std::string	result = "type 1/2: ";
 	std::string c1 = getCallsign (c28a);
 	if (c1 == "")
 	   return "";
+	std::string ss = c1. substr (0, 2);
+	if (ss == "CQ")
+	   is_CQ = true;
 //	Check if we should append /R or /P suffix
 	if (r1) {
 	   if (i3 == 1) {

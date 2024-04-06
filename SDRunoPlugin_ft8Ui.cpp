@@ -314,3 +314,7 @@ void	SDRunoPlugin_ft8Ui::hide_pskButtons	() {
 	   m_form -> hide_pskButtons ();
 }
 
+void	SDRunoPlugin_ft8Ui::set_cqSelector	(bool b) {
+	m_parent. set_cqSelector (b);
+}
+

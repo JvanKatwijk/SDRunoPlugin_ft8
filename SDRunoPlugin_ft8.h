@@ -57,6 +57,7 @@ public:
 
 	void	addMessage	(const std::string &,
 	                         const std::string &, int, int);
+	void	set_cqSelector		(bool);
 virtual
 	const char* GetPluginName() const override { return "SDRuno ft8-decoder Plugin"; }
 

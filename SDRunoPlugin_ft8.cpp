@@ -600,3 +600,7 @@ void	SDRunoPlugin_ft8::show_pskStatus	(bool b) {
 	m_form. show_pskStatus (b);
 }
 
+void	SDRunoPlugin_ft8::set_cqSelector	(bool b) {
+	theProcessor. set_cqSelector (b);
+}
+

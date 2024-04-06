@@ -40,7 +40,8 @@
 	this	-> m_form	= m_form;
 	this	-> maxIterations. store (maxIterations);
 	this	-> blockToRead	= 0;
-	this	-> blockToWrite	= 0;
+	this	-> blockToWrite	= 0;	
+	cqSelector. store (false);
 	this	-> filePointer	= nullptr;
 	blocks_in. store (0);
 	running. store (false);
@@ -119,8 +120,10 @@ packHandler unPacker;
 
 	   if (check_crc_bits (plain174, 96)) {
 //	crc is correct, unpack  the message
-	      std::string res = unPacker. unpackMessage  (plain174);
+	      bool is_CQ	= false;
+	      std::string res = unPacker. unpackMessage  (plain174, is_CQ);
 	      if (res != "") {
+	         if ((cqSelector. load () && is_CQ) || !cqSelector. load ())
 	         showLine (theBuffer [blockToRead]. lineno,
 	                   theBuffer [blockToRead]. value,
 	                   theBuffer [blockToRead]. frequency,
@@ -267,5 +270,9 @@ bool	ft8_processor::set_ft8Dump	() {
 	   locker. unlock ();
 	}
 	return filePointer != nullptr;
+}
+
+void	ft8_processor::set_cqSelector (bool b) {
+	cqSelector. store (b);
 }
 
