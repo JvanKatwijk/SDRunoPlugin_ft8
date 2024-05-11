@@ -379,13 +379,21 @@ the values are maintained between invocations of the plugin");
 	messageButton.events().click([&]() {handle_showMessageButton (); });
 
 	freqSetter. push_back ("presets");
+	freqSetter. push_back ("1840");
         freqSetter. push_back ("3575");
+		freqSetter. push_back ("5347");
         freqSetter. push_back ("7075");
         freqSetter. push_back ("10136");
         freqSetter. push_back ("14075");
 		freqSetter. push_back ("18100");
 		freqSetter. push_back ("21074");
 		freqSetter. push_back ("24915");
+		freqSetter. push_back ("28074");
+		freqSetter. push_back ("50323");
+		freqSetter. push_back ("70100");
+		freqSetter. push_back ("144174");
+		freqSetter. push_back ("432065");
+
 
 	std::string presetList = m_parent. load_presets ();
 	std::istringstream f (presetList);
