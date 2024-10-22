@@ -10,7 +10,13 @@ samples per second.
 The first step in the plugin's operation is to filter and decimate to
 a stream of samples on 12000 Ss.
 
-The plugin provides only a few controls, read the manual.
+The plugin provides only a few controls and supports - as the picture shows - uploading the results to the PSKreporter.
+In order to use that functionality you shouls have entered a callsign and 
+a locator. 
+The widget contains a selector - a combobox - with a list of known frequencies
+for FT8. Of course, you can add your preferred frequency to that list.
+
+The various selectors are equipped with tooltips.
 
 ![overview](/ft8-widget.png?raw=true)
 
