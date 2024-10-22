@@ -36,7 +36,7 @@
 	                                   theProcessor (this, &m_form, 14) {
 	this	-> toneLength	= WORKING_RATE / 6.25;
 	for (int i = 0; i < nrBUFFERS; i ++)
-	   theBuffer [i] = new float [2 * toneLength];
+	   theBuffer [i] = new float [2 * toneLength + 1];
 	window			= new float [toneLength];
 	inputBuffer		= new std::complex<float> [toneLength];
 	inBuffer		= new std::complex<float> [toneLength / FRAMES_PER_TONE];
@@ -222,8 +222,18 @@ void	SDRunoPlugin_ft8::processSample (std::complex<float> z) {
 	float sum	= 0;
 	for (int i = 0; i < 2 * toneLength; i ++)
 	   sum += abs (fftVector_out [i]);
-	sum /= 2 * toneLength;
-//
+	 float avg = sum / (2 * toneLength);
+
+
+	sum = 0;
+        int     teller = 0;
+        for (int i = 0; i < 2 * toneLength; i ++)
+           if (abs (fftVector_out [i]) < avg / 10) {
+              teller ++;
+              sum += abs (fftVector_out [i]);
+           }
+        float min = sum / teller;
+
 //	copy the spectrum into the buffer, negative frequencies first
 //	No idea how log10 reacts on values like "nan" or "inf"
 	for (int i = 0; i < toneLength; i ++) {
@@ -247,7 +257,8 @@ void	SDRunoPlugin_ft8::processSample (std::complex<float> z) {
 //
 //	Since the "end" (begin) of the buffer is not used in the processing
 //	we store the average signal value of this "tone" into 0
-	theBuffer [fillIndex][0] = 10 * log10 (0.0001 + sum);
+	theBuffer [fillIndex][0] = 10 * log10 (0.0001 + min);
+	theBuffer [fillIndex][2 * toneLength] = 10 * log10 (0.0001 + min);
 
 	fillIndex = (fillIndex + 1) % nrBUFFERS;
 	lineCounter ++;
@@ -439,7 +450,7 @@ float	avg = 0;
 	}
 	avg /= (end - begin);
 
-	for (int index = begin + 5; index < end - 5; index ++) {
+	for (int index = begin + 6; index < end - 5; index ++) {
 	   if (workVector [index] < 1.05 * avg)	// 
 	      continue;
 
@@ -515,6 +526,7 @@ void	SDRunoPlugin_ft8::handle_startstopButton () {
 	   theWriter = nullptr;
 	   locker.unlock();
 	   m_form.show_pskStatus (false);
+	   m_form. save_pskStatus (false);
 	   m_form.hide_showMessageButton(false);
 	   return;
 	}
@@ -526,12 +538,15 @@ void	SDRunoPlugin_ft8::handle_startstopButton () {
 	   pskReady = false;
 	}
 	locker. unlock ();
+	m_form. save_pskStatus (pskReady);
 	m_form. show_pskStatus (pskReady);
 	m_form. hide_showMessageButton (pskReady);
 }
 
 void	SDRunoPlugin_ft8::handle_freqSetter	(int freq) {
 	m_controller	-> SetCenterFrequency (0, freq);
+	m_form. save_startFreq (freq);
+	m_form. display_startFreq (freq);
 }
 
 std::string SDRunoPlugin_ft8::handle_readPresets	()  {

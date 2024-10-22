@@ -32,6 +32,12 @@ public:
 	std::string	Load_callsign	();
 	std::string	Load_grid	();
 	std::string	Load_antenna	();
+	int     get_startFreq           ();
+        void    save_startFreq          (int);
+        void    display_startFreq       (int);
+        void    save_pskStatus          (bool);
+        bool    get_pskStatus           ();
+
 	void	Store_callsign	(const std::string &);
 	void	Store_grid	(const std::string &);
 	void	Store_antenna	(const std::string &);

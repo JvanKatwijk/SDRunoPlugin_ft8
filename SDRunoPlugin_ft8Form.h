@@ -62,6 +62,7 @@ public:
 	void	ft8_textBlock		(const std::string);
 	void	hide_pskButtons		();
 	bool	add_presetFrequency	(const std::string);
+	void	display_startFreq	(int);
 	void	Run			();
 
 private:
@@ -125,7 +126,9 @@ private:
 	                  {*this, nana::rectangle (350, 70, 50, 20)};
 	nana::combox	readPresets
 	                  {*this, nana::rectangle (410, 70, 80, 20)};
-	std::list<std::string> displayList;
-//	nana::textbox	textBlock {*this, nana::rectangle (30, 100, 480, 480) };	 
-	nana::label	textBlock {*this, nana::rectangle (30, 100, 480, 480) };	 
+	nana::label     freqLabel
+                          {*this, nana::rectangle (200, 100,200, 20)};
+        std::list<std::string> displayList;
+//      nana::textbox   textBlock {*this, nana::rectangle (30, 130, 480, 480) };        
+        nana::label     textBlock {*this, nana::rectangle (30, 130, 480, 480) };
 };

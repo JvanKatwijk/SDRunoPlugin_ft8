@@ -394,7 +394,6 @@ the values are maintained between invocations of the plugin");
 		freqSetter. push_back ("144174");
 		freqSetter. push_back ("432065");
 
-
 	std::string presetList = m_parent. load_presets ();
 	std::istringstream f (presetList);
 	
@@ -526,5 +525,9 @@ bool	SDRunoPlugin_ft8Form::add_presetFrequency (const std::string freq) {
 
 void	SDRunoPlugin_ft8Form::set_cqSelector	(const std::string &s) {
 	m_parent. set_cqSelector (s == "CQ only");
+}
+
+void    SDRunoPlugin_ft8Form::display_startFreq (int freq) {
+        freqLabel. caption (std::string ("Working frequency ") + std::to_string(freq / 1000) + " Khz");
 }
 

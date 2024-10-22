@@ -148,6 +148,22 @@ std::vector<int32_t> presetList;
 	return presetList;
 }
 
+int     SDRunoPlugin_ft8Ui::get_startFreq       () {
+std::string startFreq_string;
+        m_controller. GetConfigurationKey ("ft8.startFreq", startFreq_string);
+        if (startFreq_string == "")
+           return -1;
+        return atoi (startFreq_string. c_str ());
+}
+
+void    SDRunoPlugin_ft8Ui::save_startFreq      (int startFreq) {
+        if (startFreq < 0)
+           return; 
+        m_controller. SetConfigurationKey ("ft8.startFreq",
+                                                std::to_string (startFreq));
+}
+
+
 void	SDRunoPlugin_ft8Ui::handle_savePresets	() {
 std::string presetList;
 	m_controller. GetConfigurationKey ("ft8.presets", presetList);
@@ -316,5 +332,24 @@ void	SDRunoPlugin_ft8Ui::hide_pskButtons	() {
 
 void	SDRunoPlugin_ft8Ui::set_cqSelector	(bool b) {
 	m_parent. set_cqSelector (b);
+}
+
+void    SDRunoPlugin_ft8Ui::display_startFreq   (int freq) {
+        std::lock_guard<std::mutex> l (m_lock); 
+        if (m_form != nullptr)
+           m_form -> display_startFreq (freq);
+}       
+
+void    SDRunoPlugin_ft8Ui::save_pskStatus      (bool status) {
+        m_controller. SetConfigurationKey ("ft8.pskStatus",
+                                                std::to_string (status));
+}
+
+bool    SDRunoPlugin_ft8Ui::get_pskStatus() {
+        std::string status;
+        m_controller.GetConfigurationKey("ft8.pskStatus", status);
+        if (status == "")
+                return false;
+        return  (bool)(stoi(status));
 }
 
