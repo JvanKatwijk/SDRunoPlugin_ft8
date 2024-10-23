@@ -40,7 +40,7 @@ The Netherlands\\
 %\baselineskip 22pt
 \ \\
 \ \\
-\includegraphics[width=150mm]{SDRunoPlugin_ft8.png}
+\includegraphics[width=170mm]{SDRunoPlugin_ft8.png}
 \ \\
 \section{Introduction}
 The FT8 plugin is a plugin for decoding FT8 messages and
@@ -73,7 +73,7 @@ the spectrum of the region of interest is only a few KHz wide.
 \section{The FT8 plugin and the reporter map}
 \begin{figure}[htp]
 \centering
-\includegraphics[width=80mm]{ft8-widget.png}
+\includegraphics[width=170mm]{ft8-widget.png}
 \caption{ft8Plugin: the widget}
 \label{figure:ft8_widget}
 \end{figure}
@@ -100,7 +100,7 @@ distance is 6.25 Hz);
 \end{itemize}
 
 On the top  line in the control part of the widget there are
-two selectors and two buttons
+two selectors and three buttons
 \begin{itemize}
 \item
 The {\em first} selector sets the value for the number of iterations,
@@ -114,7 +114,7 @@ next invocation of the plugin.
 in which ft8 messages are searched for.
 Default value is 2 KHz, maximum is 6 MHz.
 The selected frequency is here the {\em center} frequency, so a
-width of 2 KHz means from -1 KHz to +1 KHz wrt the selected frequency.
+width of 4 KHz means from -2 KHz to +2 KHz wrt the selected frequency.
 {\em Obviously, the larger the width, the more processing power is needed.}
 \item
 Next a button labeled {\em file} is there. As the name suggests, a file can
@@ -125,6 +125,8 @@ of the label will be green.
 supports a number of preset frequency values. In previous versions this was a
 static list, in this version the user can add his/hers preferred frequencies
 to the list (and the default list is shortened).
+\item The button labeled {\em All} allows selection in the displayed messaged
+between all decoded messages or just the "cq" messages.
 \item to the far right of the top line there is the inevitable copyright symbol.
 \end{itemize}
 The second line in the widget shows three (or four) buttons, a label
@@ -150,6 +152,7 @@ between invocations of the plugin.
 \item if the psk report function is selected, a third button shows,
 labeled "show". If touched, the ft8 plugin shows the elements of
 the messages  that are transmitter to the psk reporter.
+The picture shows these messages.
 Transmission takes place in UDP mode, using port 4739 of the pskreporter server.
 \item FT8 is transmitted is well defined regions in different amateur bands. To
 ease  switching between these bands, the plugin now contains a button - labeled
@@ -159,11 +162,12 @@ frequencies (of course the one I am using most of the time), and as said,
 your own preferred frequencoes can be added to the list.
 Of course, the added frequencies will be saved between sessions.
 \item the {\em delete} button will remove the last entered preset frequency.
+\item A user-defined {\em preset} file can be used.
 \end{itemize}
-
+The third row consists of a single label, showing the selected working frequency.
 \begin{figure}[htp]
 \centering
-\includegraphics[width=100mm]{pskreportermap.png}
+\includegraphics[width=140mm]{pskreportermap.png}
 \caption{ft8Plugin: the map, example}
 \label{figure:pskReportermap}
 \end{figure}
