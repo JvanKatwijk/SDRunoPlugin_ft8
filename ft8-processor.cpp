@@ -209,6 +209,17 @@ std::string s;
 	insertString (target, pos, s);
 }
 
+std::string make_csvLine (std::string time,
+	                  int value, int freq, std::string message) {
+std::string res;
+
+	res += time + ";";
+	res += std::to_string (value) + ";"; 
+	res += std::to_string (freq) + ";"; 
+	res += message + ";";
+	return res;
+}
+
 std::string makeLine (std::string time,
 	              int value, int freq,
 	              std::string message)  {
@@ -245,21 +256,29 @@ void	ft8_processor::showLine (int line, int val,
 	std::string temp = makeLine (buffer, val, currentFreq + freq, s);
 	m_form -> ft8_textBlock (temp);
 	locker. lock();
-	if (filePointer != nullptr)
-	   fprintf (filePointer, "%s\n", temp. c_str ());
+	if (filePointer != nullptr) {
+	   std::string ss = make_csvLine (buffer, val, currentFreq + freq, s);
+	   fprintf (filePointer, "%s\n", ss. c_str ());
+	}
 	locker. unlock ();
 }
 
 bool	ft8_processor::set_ft8Dump	() {
 	if (filePointer == nullptr) {
-	   nana::filebox fb (0, false);
-	   fb.add_filter ("Text File", "*.text");
-	   fb.add_filter("All Files", "*.*");
+	   time_t now = time (0);
+           std::string nu = ctime (&now);
+           nana::filebox fb (0, false);
+           fb. init_path (getenv ("HOMEPATH"));
+           fb. add_filter ("cv File", "*.csv");
+
 	   auto files = fb();
 	   if (!files. empty ()) {
 	      locker. lock ();
 	      filePointer =
 	             fopen (files. front (). string (). c_str (), "w");
+	      if (filePointer != nullptr) {
+	         fwrite (nu. c_str (), 1, nu. size (), filePointer);
+	      }
 	      locker. unlock ();
 	   }
 	}
